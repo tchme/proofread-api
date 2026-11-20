@@ -1,0 +1,62 @@
+/* Extension pages: the editor tab and the settings popup / options tab. Follows the system theme. */
+:root {
+  --bg: #f2f2f5; --surface: #ffffff; --surface-2: #f6f6f9; --line: #e0e0e7; --fg: #18181c; --muted: #666672;
+  --accent: #d6336c; --on-accent: #ffffff; --field: #ffffff; --field-line: #cbcbd4; --bad: #c62f3a;
+  --mark-bg: #cfeedd; --mark-fg: #0f3d24;
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif; --mono: Consolas, ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111114; --surface: #1a1a1e; --surface-2: #212126; --line: #2d2d34; --fg: #ececf0; --muted: #9b9ba6;
+    --accent: #ff6b9a; --on-accent: #1a0b11; --field: #141417; --field-line: #3a3a42; --bad: #ff6b6b;
+    --mark-bg: #1f4c35; --mark-fg: #d9f6e4;
+    color-scheme: dark;
+  }
+}
+[hidden] { display: none !important }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--font) }
+.i { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round }
+.label { font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 600 }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px }
+
+/* editor */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 28px 24px 48px; display: grid; gap: 18px }
+h1 { margin: 0; font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; gap: 10px }
+.logo { width: 32px; height: 32px; border-radius: 9px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center }
+.editor { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden }
+.ed-actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px; border-bottom: 1px solid var(--line) }
+.ed-btn { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface-2); color: var(--fg); font: 500 14px var(--font); cursor: pointer }
+.ed-btn .i { color: var(--accent) }
+.ed-btn:hover { border-color: var(--accent) }
+.ed-panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) }
+.pane { padding: 14px; display: grid; gap: 8px; align-content: start; min-width: 0 }
+.pane + .pane { border-left: 1px solid var(--line) }
+.pane-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 32px }
+#src { width: 100%; box-sizing: border-box; min-height: 340px; resize: vertical; border: 1px solid var(--field-line); border-radius: 10px; background: var(--field); color: var(--fg); font: 15px/1.6 var(--font); padding: 10px 12px }
+.ed-out { min-height: 340px; box-sizing: border-box; border: 1px dashed var(--line); border-radius: 10px; padding: 10px 12px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere }
+.ed-out.muted { color: var(--muted) }
+.ed-out mark { background: var(--mark-bg); color: var(--mark-fg); border-radius: 3px; padding: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone }
+.ghost { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--fg); font: 500 13px var(--font); cursor: pointer }
+@media (max-width: 700px) { .ed-panes { grid-template-columns: minmax(0, 1fr) } .pane + .pane { border-left: 0; border-top: 1px solid var(--line) } }
+
+/* settings: a 360 px popup; opened as a tab it becomes a centred card */
+.settings { width: 360px; box-sizing: border-box; padding: 18px; display: grid; gap: 14px; background: var(--surface) }
+.set-head { display: flex; align-items: center; gap: 12px }
+.set-name { font-weight: 600 }
+.set-sub { font-size: .8rem; color: var(--muted) }
+.fld { display: grid; gap: 5px; font-size: .85rem; font-weight: 500 }
+.fld small { font-weight: 400; color: var(--muted) }
+.in { width: 100%; box-sizing: border-box; height: 38px; border: 1px solid var(--field-line); border-radius: 9px; background: var(--field); color: var(--fg); font: 13.5px var(--mono); padding: 0 10px }
+.primary { height: 38px; border: 0; border-radius: 9px; background: var(--accent); color: var(--on-accent); font: 600 14px var(--font); cursor: pointer }
+.status { margin: 0; font-size: .85rem; min-height: 1.3em }
+.status.bad { color: var(--bad) }
+.hk { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 12px }
+.hk dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; font-size: .88rem }
+.hk dd { margin: 0 }
+.hk small { color: var(--muted); font-size: .8rem }
+kbd { font: 500 .78rem var(--mono); padding: 1px 6px; border-radius: 5px; border: 1px solid var(--line); background: var(--surface-2) }
+@media (min-width: 500px) {
+  body.settings-page { padding: 40px 16px }
+  body.settings-page .settings { margin: 0 auto; border: 1px solid var(--line); border-radius: 14px }
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Правка: редактор</title>
+<link rel="stylesheet" href="page.css">
+</head>
+<body>
+<main class="wrap">
+  <h1><span class="logo" data-icon="edit"></span>Правка</h1>
+  <div class="editor">
+    <div class="ed-actions">
+      <button class="ed-btn" type="button" data-act="fix" data-icon="fix">Исправить ошибки</button>
+      <button class="ed-btn" type="button" data-act="rephrase" data-icon="rephrase">Другими словами</button>
+      <button class="ed-btn" type="button" data-act="style" data-icon="style">Улучшить стиль</button>
+      <button class="ed-btn" type="button" data-act="translate" data-icon="translate">Перевести на русский</button>
+    </div>
+    <div class="ed-panes">
+      <div class="pane">
+        <div class="pane-head"><label class="label" for="src">Твой текст</label></div>
+        <textarea id="src"></textarea>
+      </div>
+      <div class="pane">
+        <div class="pane-head"><span class="label" id="out-title">Результат</span><button class="ghost" id="copy" type="button" data-icon="copy">Копировать</button></div>
+        <div class="ed-out muted" id="out" aria-live="polite">Выбери действие сверху.</div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="shared.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>

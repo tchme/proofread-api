@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Правка: настройки</title>
+<link rel="stylesheet" href="page.css">
+</head>
+<body class="settings-page">
+<form class="settings" id="form" autocomplete="off">
+  <div class="set-head">
+    <span class="logo" data-icon="edit"></span>
+    <div><div class="set-name">Правка</div><div class="set-sub">Настройки</div></div>
+  </div>
+  <label class="fld">Адрес сервера<input class="in" id="base" spellcheck="false"></label>
+  <label class="fld">Ключ<input class="in" id="key" type="password" placeholder="tc_live_…"><small>Хранится только в этом браузере.</small></label>
+  <label class="fld">Модель
+    <select class="in" id="model"></select>
+    <input class="in" id="custom" spellcheck="false" placeholder="название модели" hidden>
+    <small id="note"></small>
+  </label>
+  <button class="primary" type="submit">Сохранить</button>
+  <p class="status" id="status" role="status"></p>
+  <div class="hk">
+    <div class="label">Горячие клавиши</div>
+    <dl>
+      <dt>Исправить ошибки</dt><dd><kbd>Alt+R</kbd></dd>
+      <dt>Другими словами</dt><dd><kbd>Alt+U</kbd></dd>
+      <dt>Улучшить стиль</dt><dd><kbd>Alt+Y</kbd></dd>
+      <dt>Перевести на русский</dt><dd><kbd>Alt+T</kbd></dd>
+      <dt>Открыть в редакторе</dt><dd><kbd>Alt+O</kbd></dd>
+    </dl>
+    <small>Работают, когда текст выделен, и в русской раскладке тоже.</small>
+  </div>
+</form>
+<script src="shared.js"></script>
+<script src="api.js"></script>
+<script src="options.js"></script>
+</body>
+</html>
