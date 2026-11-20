@@ -22,6 +22,7 @@ const ICONS = {
   return: ['M19.5 5.5v5.5a3 3 0 0 1-3 3H5', 'M9 10l-4 4 4 4'],
   check: ['M5 12.5l4.5 4.5L19 7.5'],
 };
+ICONS.refresh = ICONS.rephrase; // the card's «Обновить» shows the same turning arrows
 
 function icon(name) {
   const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');

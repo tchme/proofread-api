@@ -20,4 +20,4 @@
 - `page`: plain page text. The card offers only copying.
 
 ## Card states
-Loading (skeleton); result (diff marks only for «Исправить ошибки»); «Ошибок не найдено» (the answer equals the input up to whitespace); «Перевод не нужен» (`isMostlyRussian`, no request); error (the server's message, «Повторить», «Настройки»).
+Loading (skeleton); result (diff marks only for «Исправить ошибки»; buttons «Заменить текст», «Обновить» = the same action again, «Копировать»); «Ошибок не найдено» (the answer equals the input up to whitespace); «Перевод не нужен» (`isMostlyRussian`, no request); error (the server's message, «Повторить», «Настройки»).

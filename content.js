@@ -94,10 +94,11 @@
   const title = h('span', { class: 'title' });
   const body = h('div', { class: 'body' });
   const replaceBtn = h('button', { class: 'cbtn replace', type: 'button', onclick: replace }, icon('return'), 'Заменить текст');
+  const refreshBtn = iconBtn('refresh', 'Обновить', () => run(lastAction), 'cbtn icon refresh');
   const copyBtn = iconBtn('copy', 'Копировать', e => copy(result, e.currentTarget), 'cbtn icon copy');
   const retryBtn = h('button', { class: 'cbtn retry', type: 'button', onclick: () => run(lastAction) }, 'Повторить');
   const settingsBtn = h('button', { class: 'cbtn', type: 'button', onclick: () => send({ type: 'settings' }) }, 'Настройки');
-  const foot = h('div', { class: 'foot' }, replaceBtn, copyBtn, retryBtn, settingsBtn);
+  const foot = h('div', { class: 'foot' }, replaceBtn, refreshBtn, copyBtn, retryBtn, settingsBtn);
   const card = h('div', { class: 'pop card', role: 'dialog', 'aria-label': 'Результат' },
     h('div', { class: 'head' }, title, iconBtn('panel', 'Открыть в редакторе', () => run('editor')), iconBtn('close', 'Закрыть', hide)),
     body, foot);
@@ -185,7 +186,7 @@
     else if (diff) body.replaceChildren(...diffWords(c.text, text).map(p => p.changed ? h('mark', {}, p.text) : p.text));
     else body.replaceChildren(text);
     replaceBtn.hidden = !text || c.kind === 'page';
-    copyBtn.hidden = !text;
+    copyBtn.hidden = refreshBtn.hidden = !text;
     retryBtn.hidden = settingsBtn.hidden = !retry;
     foot.hidden = !text && !retry;
     card.hidden = false;

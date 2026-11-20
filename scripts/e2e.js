@@ -159,9 +159,12 @@ async function cardDone(p) {
     const clicksBefore = await p.js('window.pageClicks');
     await click(p, '.tr');
     ok('translate: the card title', await cardDone(p) === 'Перевод на русский');
-    await shot(p, '2-translate-card');
     ok('the translation is Russian', /[а-яё]{4}/i.test(textOf(await html(p, '.body'))), await html(p, '.body'));
     ok('no «Заменить текст» for page text', !(await shown(p, '.replace')));
+    await click(p, '.refresh');
+    ok('«Обновить» asks again: the card is loading', textOf(await html(p, '.title')).endsWith('…'));
+    ok('«Обновить» brings a new translation', await cardDone(p) === 'Перевод на русский');
+    await shot(p, '2-translate-card');
     ok('the toolbar click did not reach the page', await p.js('window.pageClicks') === clicksBefore);
     await key(p, 'Escape', 'Escape', 27);
     ok('Esc closes the card', !(await shown(p, '.card')));
