@@ -31,15 +31,24 @@ async function request(url, init, seconds) {
   }
 }
 
+// Models that refused reasoning_effort: 'none' (until the worker sleeps), so they are not asked twice every time.
+const noEffort = new Set();
+
 async function complete({ base, key, model }, action, text) {
   if (!key) throw new Error('Вставь ключ в настройках расширения.');
   if (!PROMPTS[action]) throw new Error('Неизвестное действие: ' + action);
-  const r = await request(endpoint(base, '/chat/completions'), {
-    method: 'POST',
-    headers: authHeaders(key),
-    body: JSON.stringify({ model, messages: [{ role: 'system', content: PROMPTS[action] + RULES }, { role: 'user', content: text }] }),
-  }, 60);
-  const json = await r.json().catch(() => null);
+  const body = { model, messages: [{ role: 'system', content: PROMPTS[action] + RULES }, { role: 'user', content: text }] };
+  // tooken.club models reason by default: 150-250 hidden tokens, 6-8 s instead of ~2.5 s (docs/bugs.md)
+  if (!noEffort.has(model)) body.reasoning_effort = 'none';
+  const post = () => request(endpoint(base, '/chat/completions'), { method: 'POST', headers: authHeaders(key), body: JSON.stringify(body) }, 60);
+  let r = await post();
+  let json = await r.json().catch(() => null);
+  if (r.status === 400 && body.reasoning_effort && json && json.error && json.error.param === 'reasoning_effort') {
+    noEffort.add(model);
+    delete body.reasoning_effort;
+    r = await post();
+    json = await r.json().catch(() => null);
+  }
   if (!r.ok) throw new Error(serverError(json, r.status));
   const out = json && json.choices && json.choices[0] && json.choices[0].message && json.choices[0].message.content;
   if (!out || !out.trim()) throw new Error('Сервер вернул пустой ответ.');
@@ -58,4 +67,4 @@ async function listModels({ base, key }) {
     .sort();
 }
 
-if (typeof module === 'object') module.exports = { DEFAULTS, PROMPTS, complete, listModels };
+if (typeof module === 'object') module.exports = { DEFAULTS, PROMPTS, RULES, endpoint, authHeaders, complete, listModels };

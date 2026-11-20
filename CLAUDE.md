@@ -5,6 +5,7 @@ A Chromium MV3 extension (Chrome, Edge, Brave, Opera, Yandex Browser) that copie
 ## Commands
 - Unit tests: `node --test` (no dependencies)
 - Live API check: `PRAVKA_KEY=… node scripts/smoke.js` (~1000 tokens)
+- Model speed: `PRAVKA_KEY=… node scripts/bench.js` (all chat models, one request at a time)
 - Browser end-to-end: `PRAVKA_KEY=… CHROME=<chromium exe> node scripts/e2e.js` (~800 tokens; `PRAVKA_SHOTS=<dir>` saves screenshots)
 - Install and reload: docs/development.md
 
