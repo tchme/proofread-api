@@ -20,7 +20,7 @@
 ## Release
 - Repo: `github.com/tchme/proofread-api` (private). Work happens on a branch; `main` holds released code only.
 - Steps: bump `version` in `manifest.json`, commit, fast-forward `main` to the branch, run the tests (`node --test`, `scripts/e2e.js`), then `node scripts/release.js` on `main` (`--dry` stops before anything leaves the PC).
-- The script refuses a dirty tree, a branch other than `main`, a tag that exists, failing unit tests. It takes the GitHub token from git's saved login for `tchme` (Git Credential Manager, `GCM_INTERACTIVE=never`, never printed), creates the repo (private) if it is missing, pushes `main` and the tag `v<version>`, creates the release with the commit subjects since the previous tag and uploads `proofread-api-<version>.zip`: the tree without `docs/`, `scripts/`, `test/`, `CLAUDE.md`.
+- The script refuses a dirty tree, a branch other than `main`, a tag that exists, failing unit tests. It takes the GitHub token from git's saved login for `tchme` (Git Credential Manager, `GCM_INTERACTIVE=never`, never printed), creates the repo (private) if it is missing, pushes `main` and the tag `v<version>`, creates the release with the commit subjects since the previous tag and uploads `proofread-api-<version>.zip`: the tree without `docs/`, `scripts/`, `test/`, `CLAUDE.md`, inside one folder `proofread-api/` (a fixed name, so every update unpacks into the same folder).
 - No auto-update (the user's decision, 2026-11-20). People update by hand as `README.md` says: replace the files, then press reload on the extension's card. Without the reload the worker may keep running the old cached code even across browser restarts (measured in an earlier unpacked extension by the same author, not re-measured here).
 
 ## Conventions

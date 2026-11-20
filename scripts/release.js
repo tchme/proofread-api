@@ -38,7 +38,8 @@ async function api(tok, method, url, body, type = 'application/json') {
   const prev = git('tag', '-l', 'v*', '--sort=-v:refname').split('\n')[0];
   const notes = git('log', '--format=- %s', prev ? `${prev}..HEAD` : 'HEAD');
   const zip = path.join(os.tmpdir(), `${REPO}-${version}.zip`);
-  git('archive', '--format=zip', '-o', zip, 'HEAD', '--', '.', ':!docs', ':!scripts', ':!test', ':!CLAUDE.md');
+  // one folder with a fixed name inside: the path defines the extension's identity, so every update unpacks into the same folder
+  git('archive', '--format=zip', `--prefix=${REPO}/`, '-o', zip, 'HEAD', '--', '.', ':!docs', ':!scripts', ':!test', ':!CLAUDE.md');
   console.log(`${tag}: ${fs.statSync(zip).size} bytes zip, notes:\n${notes}`);
   if (DRY) return console.log('dry run: nothing pushed');
 
