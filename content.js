@@ -62,7 +62,7 @@
     return el;
   }
 
-  const host = document.createElement('pravka-ui');
+  const host = document.createElement('proofread-ui');
   host.style.cssText = 'all:initial;position:absolute;top:0;left:0;width:0;height:0;z-index:2147483647';
   const root = host.attachShadow({ mode: 'closed' });
   const sheet = new CSSStyleSheet();
@@ -82,7 +82,7 @@
   const menu = h('div', { class: 'pop menu', role: 'menu' }, MENU.map(([action, ic, label, key]) =>
     h('button', { class: 'item', type: 'button', role: 'menuitem', onclick: () => run(action) }, icon(ic), h('span', {}, label), h('span', { class: 'k' }, key))));
   const editBtn = h('button', { class: 'btn edit', type: 'button', 'aria-haspopup': 'menu', 'aria-expanded': 'false', onclick: () => setMenu(menu.hidden) }, icon('edit'), 'Редактировать');
-  const toolbar = h('div', { class: 'pop toolbar', role: 'toolbar', 'aria-label': 'Правка' },
+  const toolbar = h('div', { class: 'pop toolbar', role: 'toolbar', 'aria-label': 'Proofread API' },
     editBtn,
     h('button', { class: 'btn tr', type: 'button', title: 'Перевести на русский (Alt+T)', onclick: () => run('translate') }, icon('translate'), 'Перевести'),
     h('span', { class: 'sep' }),

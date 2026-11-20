@@ -1,11 +1,11 @@
 'use strict';
-// Live check of api.js against the real server: PRAVKA_KEY=... node scripts/smoke.js  (PRAVKA_MODEL to try another model).
+// Live check of api.js against the real server: PROOFREAD_KEY=... node scripts/smoke.js  (PROOFREAD_MODEL to try another model).
 // Spends ~1000 tokens: the model list, the four actions, one request with a wrong key.
 const { DEFAULTS, complete, listModels } = require('../api.js');
 
-const key = process.env.PRAVKA_KEY;
-if (!key) { console.error('set PRAVKA_KEY'); process.exit(2); }
-const s = { ...DEFAULTS, key, model: process.env.PRAVKA_MODEL || DEFAULTS.model };
+const key = process.env.PROOFREAD_KEY;
+if (!key) { console.error('set PROOFREAD_KEY'); process.exit(2); }
+const s = { ...DEFAULTS, key, model: process.env.PROOFREAD_MODEL || DEFAULTS.model };
 const SAMPLES = [
   ['fix', 'Когда я пришел домой то увидел что дверь открыта хотя точно помню что закрывал ее'],
   ['rephrase', 'Короче я посмотрел макет в целом всё норм но кнопки надо сделать побольше'],

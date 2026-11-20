@@ -1,16 +1,16 @@
 'use strict';
 // Speed of chat models on one short broken sentence, streamed so the first word and the end are timed apart:
-//   PRAVKA_KEY=... node scripts/bench.js [--runs=2] [--extra='{"reasoning_effort":"none"}'] [model ...]
+//   PROOFREAD_KEY=... node scripts/bench.js [--runs=2] [--extra='{"reasoning_effort":"none"}'] [model ...]
 // No models given = every chat model the server lists. Spends ~150-500 tokens per request.
 const { DEFAULTS, PROMPTS, RULES, endpoint, authHeaders, listModels } = require('../api.js');
 
-const key = process.env.PRAVKA_KEY;
-if (!key) { console.error('set PRAVKA_KEY'); process.exit(2); }
+const key = process.env.PROOFREAD_KEY;
+if (!key) { console.error('set PROOFREAD_KEY'); process.exit(2); }
 const args = process.argv.slice(2);
 const opt = name => (args.find(a => a.startsWith(`--${name}=`)) || '').split('=').slice(1).join('=');
 const RUNS = +opt('runs') || 2;
 const EXTRA = opt('extra') ? JSON.parse(opt('extra')) : {};
-const TEXT = process.env.PRAVKA_TEXT || 'привит я твой маладой чилавек и я очен хачю памидари тваи целоват';
+const TEXT = process.env.PROOFREAD_TEXT || 'привит я твой маладой чилавек и я очен хачю памидари тваи целоват';
 const s = { ...DEFAULTS, key };
 
 async function once(model) {

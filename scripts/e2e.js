@@ -1,16 +1,16 @@
 'use strict';
-// The extension in real headless Chrome: PRAVKA_KEY=... node scripts/e2e.js  (CHROME=path to override; SKIP without Chrome).
+// The extension in real headless Chrome: PROOFREAD_KEY=... node scripts/e2e.js  (CHROME=path to override; SKIP without Chrome).
 // CDP over a pipe, own temp profile; the test page is served by CDP Fetch on a fake host, the API calls go to the real server
 // (~4 requests, ~800 tokens). The harness follows textexpander's tests/real.js.
 const fs = require('node:fs'), os = require('node:os'), path = require('node:path'), { spawn } = require('node:child_process');
 
 const CHROME = process.env.CHROME || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 if (!fs.existsSync(CHROME)) { console.log(`SKIP (Chrome not found: ${CHROME}; set CHROME=path)`); process.exit(0); }
-const KEY = process.env.PRAVKA_KEY;
-if (!KEY) { console.error('set PRAVKA_KEY'); process.exit(2); }
+const KEY = process.env.PROOFREAD_KEY;
+if (!KEY) { console.error('set PROOFREAD_KEY'); process.exit(2); }
 
 const EXT = path.resolve(__dirname, '..');
-const PROFILE = fs.mkdtempSync(path.join(os.tmpdir(), 'pravka-e2e-'));
+const PROFILE = fs.mkdtempSync(path.join(os.tmpdir(), 'proofread-e2e-'));
 const PAGE = `<!doctype html><meta charset=utf-8><title>t</title><body style="font:16px sans-serif;padding:40px">
 <textarea id=ta rows=3 cols=70>пажалуста пришлите отчет до пятницы я его проверю и вирну вам с коментариями</textarea>
 <p id=en>The release has been moved to Thursday because half of the team is still on vacation.</p>
@@ -19,7 +19,7 @@ const PAGE = `<!doctype html><meta charset=utf-8><title>t</title><body style="fo
 <input id=pw type=password value="секретный пароль">
 <script>window.pageClicks = 0; document.addEventListener('click', () => window.pageClicks++);</script>`;
 
-const SHOTS = process.env.PRAVKA_SHOTS; // a folder: screenshots of the toolbar and the cards go there
+const SHOTS = process.env.PROOFREAD_SHOTS; // a folder: screenshots of the toolbar and the cards go there
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const errors = [];
 let checks = 0;
@@ -75,7 +75,7 @@ async function find(pred) {
 const findNode = (n, pred) => pred(n) ? n : [...(n.children || []), ...(n.shadowRoots || [])].reduce((f, c) => f || findNode(c, pred), null);
 async function node(p, selector) {
   const { root } = await p.cdp('DOM.getDocument', { depth: -1, pierce: true });
-  const host = findNode(root, n => n.nodeName === 'PRAVKA-UI');
+  const host = findNode(root, n => n.nodeName === 'PROOFREAD-UI');
   if (!host) return 0;
   return (await p.cdp('DOM.querySelector', { nodeId: host.shadowRoots[0].nodeId, selector })).nodeId;
 }

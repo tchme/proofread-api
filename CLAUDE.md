@@ -1,12 +1,12 @@
-# Правка (pravka)
+# Proofread API (proofread-api)
 
-A Chromium MV3 extension (Chrome, Edge, Brave, Opera, Yandex Browser) that copies Yandex Browser's selection toolbar without its logos: select text → «Редактировать» (fix errors and punctuation, rephrase, improve style, open in the editor) and «Перевести» (to Russian). Answers come from any OpenAI-compatible chat API; the default is tooken.club with the model `gpt-6-luna`. UI strings are Russian; code, comments, docs and commit messages are English.
+Called «Правка» (folder `pravka`) before 0.2.0. A Chromium MV3 extension (Chrome, Edge, Brave, Opera, Yandex Browser) that copies Yandex Browser's selection toolbar without its logos: select text → «Редактировать» (fix errors and punctuation, rephrase, improve style, open in the editor) and «Перевести» (to Russian). Answers come from any OpenAI-compatible chat API; the default is tooken.club with the model `gpt-6-luna`. UI strings are Russian; code, comments, docs and commit messages are English.
 
 ## Commands
 - Unit tests: `node --test` (no dependencies)
-- Live API check: `PRAVKA_KEY=… node scripts/smoke.js` (~1000 tokens)
-- Model speed: `PRAVKA_KEY=… node scripts/bench.js` (all chat models, one request at a time)
-- Browser end-to-end: `PRAVKA_KEY=… CHROME=<chromium exe> node scripts/e2e.js` (~800 tokens; `PRAVKA_SHOTS=<dir>` saves screenshots)
+- Live API check: `PROOFREAD_KEY=… node scripts/smoke.js` (~1000 tokens)
+- Model speed: `PROOFREAD_KEY=… node scripts/bench.js` (all chat models, one request at a time)
+- Browser end-to-end: `PROOFREAD_KEY=… CHROME=<chromium exe> node scripts/e2e.js` (~800 tokens; `PROOFREAD_SHOTS=<dir>` saves screenshots)
 - Install and reload: docs/development.md
 
 ## Key rules
@@ -14,7 +14,7 @@ A Chromium MV3 extension (Chrome, Edge, Brave, Opera, Yandex Browser) that copie
 - Content-script DOM is built with `createElement` (Trusted Types sites), styled by a constructable stylesheet inside a closed shadow root; our events are stopped at the shadow root.
 - Never read password or other non-text inputs (docs/bugs.md).
 - Hotkeys match `e.code`, so they work in the Russian layout.
-- Never commit an API key; the scripts read it from `PRAVKA_KEY`.
+- Never commit an API key; the scripts read it from `PROOFREAD_KEY`.
 
 ## Docs
 - [docs/development.md](docs/development.md) — install, run, test, manual checks, conventions
