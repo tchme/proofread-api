@@ -6,7 +6,7 @@ Goal: Yandex Browser's «Исправить ошибки» (punctuation included
 - Rejected: local YandexGPT 5 Lite 8B through Ollama. The ~5 GB download was too heavy for the user.
 - Rejected: GigaChat freemium (250M Lite tokens for 12 months). It needs the Russian Ministry root certificate in Windows (TLS to all three endpoints failed without it on the user's PC) and has a topic blacklist.
 - Not chosen: YandexGPT through Yandex Cloud. It is paid but works without a certificate; it stays reachable by changing the settings.
-- Chosen: any OpenAI-compatible `/chat/completions` with a user-supplied address, key and model. Default: tooken.club, the reseller the user picked; its Russian error messages are shown as is. The user was told the risks: a grey-market reseller, and every selected text passes through it.
+- Chosen: any OpenAI-compatible `/chat/completions` with a user-supplied address, key and model. Default: tooken.club, the reseller the user picked; its Russian error messages are shown as is. Known risks: a third-party reseller, and every selected text passes through it.
 
 ## The model (measured 2026-11-20: 5 Russian phrases without commas and one prompt injection)
 | Model | Multiplier | Commas | Time | Tokens per phrase |

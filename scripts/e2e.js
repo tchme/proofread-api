@@ -1,7 +1,7 @@
 'use strict';
 // The extension in real headless Chrome: PROOFREAD_KEY=... node scripts/e2e.js  (CHROME=path to override; SKIP without Chrome).
 // CDP over a pipe, own temp profile; the test page is served by CDP Fetch on a fake host, the API calls go to the real server
-// (~4 requests, ~800 tokens). The harness follows textexpander's tests/real.js.
+// (~4 requests, ~800 tokens).
 const fs = require('node:fs'), os = require('node:os'), path = require('node:path'), { spawn } = require('node:child_process');
 
 const CHROME = process.env.CHROME || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
