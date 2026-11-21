@@ -3,6 +3,7 @@
 | File | Role |
 |---|---|
 | `manifest.json` | MV3; content scripts on all URLs and frames; host permission `<all_urls>` because the API address is user-set |
+| `icons/` | `icon.svg` is the source (pink #d6336c tile, white check, underline); `icon16/32/48/128.png` are rendered from it with headless Edge: `msedge --headless=new --default-background-color=00000000 --window-size=N,N --screenshot=iconN.png <html with the svg at N px>` |
 | `shared.js` | `ACTIONS` titles, `ICONS` + `icon()`, `norm`, `diffWords` (word LCS), `isMostlyRussian`; used by the content script, both pages and the tests |
 | `api.js` | `DEFAULTS` (tooken.club, `gpt-6-luna`), `PROMPTS` + `RULES`, `complete()` → `POST /chat/completions`, `listModels()` → `GET /models` filtered to models with the `chat` endpoint |
 | `background.js` | service worker: message router (`run`, `editor`, `settings`); opens the settings on first install |
