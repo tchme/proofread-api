@@ -11,7 +11,7 @@ const opt = name => (args.find(a => a.startsWith(`--${name}=`)) || '').split('='
 const RUNS = +opt('runs') || 2;
 const EXTRA = opt('extra') ? JSON.parse(opt('extra')) : {};
 const TEXT = process.env.PROOFREAD_TEXT || 'привит я твой маладой чилавек и я очен хачю памидари тваи целоват';
-const s = { ...DEFAULTS, key };
+const s = { ...DEFAULTS, key, base: process.env.PROOFREAD_BASE || DEFAULTS.base };
 
 async function once(model) {
   const t0 = performance.now();

@@ -5,7 +5,7 @@ const { DEFAULTS, complete, listModels } = require('../api.js');
 
 const key = process.env.PROOFREAD_KEY;
 if (!key) { console.error('set PROOFREAD_KEY'); process.exit(2); }
-const s = { ...DEFAULTS, key, model: process.env.PROOFREAD_MODEL || DEFAULTS.model };
+const s = { ...DEFAULTS, key, base: process.env.PROOFREAD_BASE || DEFAULTS.base, model: process.env.PROOFREAD_MODEL || DEFAULTS.model };
 const SAMPLES = [
   ['fix', 'Когда я пришел домой то увидел что дверь открыта хотя точно помню что закрывал ее'],
   ['rephrase', 'Короче я посмотрел макет в целом всё норм но кнопки надо сделать побольше'],
