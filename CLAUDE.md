@@ -7,7 +7,7 @@ Called «Правка» (folder `pravka`) before 0.2.0. A Chromium MV3 extension
 - Live API check: `PROOFREAD_KEY=… node scripts/smoke.js` (~1000 tokens)
 - Model speed: `PROOFREAD_KEY=… node scripts/bench.js` (all chat models, one request at a time)
 - Browser end-to-end: `PROOFREAD_KEY=… CHROME=<chromium exe> node scripts/e2e.js` (~800 tokens; `PROOFREAD_SHOTS=<dir>` saves screenshots)
-- Release to `github.com/tchme/proofread-api` (private): `node scripts/release.js [--dry]` from `main` (docs/development.md "Release")
+- Release to `github.com/tchme/proofread-api` (public): `node scripts/release.js [--dry]` from `main` (docs/development.md "Release")
 - Install and reload: docs/development.md, README.md
 
 ## Key rules

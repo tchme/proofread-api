@@ -49,3 +49,7 @@ The selected text is sent to the server set in the settings. Password fields are
 2. On `chrome://extensions` press the reload button on the extension's card, then reload the open tabs.
 
 The settings are kept as long as the folder stays the same.
+
+## License / Лицензия
+
+MIT, see [LICENSE](LICENSE). MIT, см. [LICENSE](LICENSE).

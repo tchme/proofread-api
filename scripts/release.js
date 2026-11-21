@@ -46,9 +46,9 @@ async function api(tok, method, url, body, type = 'application/json') {
   const tok = token();
   const repo = await api(tok, 'GET', `/repos/${OWNER}/${REPO}`);
   if (repo.status === 404) {
-    const made = await api(tok, 'POST', '/user/repos', { name: REPO, private: true, description: 'Fix, rephrase, restyle and translate selected text in Chromium browsers through an OpenAI-compatible API' });
+    const made = await api(tok, 'POST', '/user/repos', { name: REPO, private: false, description: 'Fix, rephrase, restyle and translate selected text in Chromium browsers through an OpenAI-compatible API' });
     if (made.status !== 201) fail(`creating the repo: ${made.status} ${made.json.message}`);
-    console.log('created private repo ' + made.json.html_url);
+    console.log('created public repo ' + made.json.html_url);
   } else if (repo.status !== 200) fail(`reading the repo: ${repo.status} ${repo.json.message}`);
 
   const remote = `https://${OWNER}@github.com/${OWNER}/${REPO}.git`;
