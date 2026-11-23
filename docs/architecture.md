@@ -1,6 +1,6 @@
 # Architecture
 
-The proofreading prompt asks the model to capitalize Russian sentences, use ё where appropriate, and omit the final sentence's full stop. It preserves internal full stops, abbreviation dots, question marks, exclamation marks and ellipses.
+The proofreading prompt asks the model to fix misspellings in casual and single-word messages while preserving correctly spelled colloquial words. It also asks the model to capitalize Russian sentences, use ё where appropriate, and omit the final sentence's full stop while preserving internal full stops, abbreviation dots, question marks, exclamation marks and ellipses.
 
 | File | Role |
 |---|---|
