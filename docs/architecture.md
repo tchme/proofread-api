@@ -1,5 +1,7 @@
 # Architecture
 
+The proofreading prompt asks the model to capitalize Russian sentences, use ё where appropriate, and omit the final sentence's full stop. It preserves internal full stops, abbreviation dots, question marks, exclamation marks and ellipses.
+
 | File | Role |
 |---|---|
 | `manifest.json` | MV3; content scripts on all URLs and frames; host permission `<all_urls>` because the API address is user-set |
